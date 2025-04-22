@@ -1,24 +1,24 @@
 import React from 'react'
 import {useState} from 'react'
 import axios from 'axios'
-// import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 function AddPlant({onAdd}) {
-
+const navigate = useNavigate()
     const [formData, setFormData] = useState({
         plant_name: '',
         image: '',
         care: '',
     
     })
-    // const navigate = useNavigate()
+
     const handleSubmit = (event)=>{
         event.preventDefault()
         axios.post('http://localhost:8000/api/plants/',formData)
         .then(response =>{
 
             onAdd(formData)
-            // navigate('/')
+            navigate('/')
         })
         .catch(err => console.error(err))
         setFormData({plant_name:'',image:'',care:''})
